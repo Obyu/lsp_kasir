@@ -9,7 +9,26 @@
                         <div class="col-span-12 xl:col-span-6">
                             <div class="dark:bg-zinc-800 dark:border-zinc-600">
                                 <div class="card-body">
-                                    <div class="relative overflow-x-auto w-full">
+                                <form action="{{ route('transaction.report') }}" method="GET" class="mb-6">
+                                    <div class="flex flex-wrap gap-2 items-center">
+                                        <select name="filter" id="filter" class="p-2 w-32 border  rounded bg-white dark:bg-zinc-700 dark:text-white">
+                                            <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Semua</option>
+                                            <option value="today" {{ request('filter') == 'today' ? 'selected' : '' }}>Hari Ini</option>
+                                            <option value="this_month" {{ request('filter') == 'this_month' ? 'selected' : '' }}>Bulan Ini</option>
+                                            <option value="last_month" {{ request('filter') == 'last_month' ? 'selected' : '' }}>Bulan Lalu</option>
+                                            <option value="year" {{ request('filter') == 'year' ? 'selected' : '' }}>Tahun</option>
+                                        </select>
+
+                                        <input type="number" name="year" id="year" class="p-2 border rounded bg-white dark:bg-zinc-700 dark:text-white hidden" placeholder="Masukkan Tahun" value="{{ request('year') }}">
+
+                                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-600 transition">Filter</button>
+                                        
+                                        <button onclick="printTable()" class="px-5 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                                            Print
+                                        </button>
+                                    </div>
+                                </form>
+                                    <div id="print-area" class="relative overflow-x-auto w-full">
                                         <table class="w-full text-sm text-left text-gray-500 ">
                                             <thead class="text-sm text-gray-700 dark:text-gray-100 bg-gray-50 dark:bg-zinc-600">
                                                 <tr>
@@ -17,7 +36,8 @@
                                                         No
                                                     </th>
                                                     <th scope="col" class="px-6 py-3">
-                                                        Kode Pesanan
+                                                        Nama Pelanggan
+                                                    </th>
                                                     </th>
                                                     <th scope="col" class="px-6 py-3">
                                                         Total
@@ -27,7 +47,7 @@
                                                     </th>
                                                     </th>
                                                     <th scope="col" class="px-6 py-3">
-                                                        Kembalian
+                                                        Kembalian / Kurang
                                                     </th>
                                                     <th scope="col" class="px-6 py-3">
                                                         Generate
@@ -44,7 +64,7 @@
                                                         {{ $loop->iteration }}
                                                     </th>
                                                     <td class="px-6 py-3.5 dark:text-zinc-100">
-                                                        {{$transaksi->pesanan->kode_pesanan}}
+                                                        {{$transaksi->pelanggan->Namapelanggan}}
                                                     </td>
                                                     <td class="px-6 py-3.5 dark:text-zinc-100">
                                                         {{'Rp ' . number_format($transaksi->total, 0, ',','.')}}
@@ -56,16 +76,11 @@
                                                     @if ($transaksi->kembalian > 0)
                                                         {{ 'Rp ' . number_format($transaksi->kembalian, 0,',','.') }}
                                                     @elseif ($transaksi->Kurang > 0)
-                                                        {{'Rp -' . number_format($transaksi->Kurang,0,',','.') }}
+                                                        {{'Rp - ' . number_format($transaksi->Kurang,0,',','.') }}
                                                     @endif
                                                     </td>
                                                     <td class="px-6 py-3.5 dark:text-zinc-100">
-                                                       <form action="#" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="bx bx-trash-alt"></button>
-                                                       </form>
-                                                       <a href="#" class=" bx bx-pencil"></a>
+                                                      <a href="{{ route('transaction.print', $transaksi->pelanggan->idpelanggan) }}"><i class=" bx bx-printer"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -76,5 +91,25 @@
                             </div>
                         </div>
 
+                        <script>
+                            function printTable()
+                            {
+                                let print = document.getElementById('print-area').innerHTML;
+                                let origin = document.body.innerHTML;
 
+                                document.body.innerHTML = print;
+                                window.print();
+                                document.body.innerHTML = origin;
+                                location.reload();
+                            }
+                            document.getElementById('filter').addEventListener('change', function () {
+                                let yearInput = document.getElementById('year');
+
+                                if (this.value === 'year') {
+                                    yearInput.classList.remove('hidden');
+                                } else {
+                                    yearInput.classList.add('hidden');
+                                }
+                            });
+                        </script>
 @endsection

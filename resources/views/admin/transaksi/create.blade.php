@@ -44,31 +44,34 @@
                         <div class="card-body">
                             <div class="">
                                 <div class="col-span-12 lg:col-span-6">
-                                    <form action="{{ route('transaction.store', $pesanans->meja->id) }}" method="POST">
+                                    <form action="{{ route('transaction.store') }}" method="POST">
                                         @csrf
                                         <div class="mb-4">
                                             <label for="nama"
                                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Nama</label>
-                                            <input name="idpesanan"
+                                            <input
                                                 class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
-                                                type="text" placeholder="{{ $pesanans->kode_pesanan }}" id="nama" value="{{ $pesanans->idpesanan }}" required readonly> 
+                                                type="text"  value="{{ $pelanggan->Namapelanggan }}" required readonly> 
+                                            <input name="idpelanggan"
+                                                class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
+                                                type="text" placeholder="{{ $pelanggan->Namapelanggan }}"  value="{{ $pelanggan->idpelanggan }}" hidden> 
                                         </div>
                                         <div class="mb-4">
                                             <label for="telp"
                                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Total Tagihan</label>
                                             <input name="total"
                                                 class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
-                                                type="text"  id="arga" value="{{$pesanans->menu->Harga * $pesanans->jumlah}}" required hidden>
+                                                type="number"   value="{{$transaksi->total_harga}}" required hidden>
                                             <input 
                                                 class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
-                                                type="text"  id="arga" value="{{'Rp ' . number_format($pesanans->menu->Harga * $pesanans->jumlah,0,',','.')}}" required>
+                                                type="text"   value="{{'Rp ' . number_format($transaksi->total_harga,0,',','.')}}" required>
                                         </div>
                                         <div class="mb-4">
                                             <label for="alamat"
                                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-100">bayar</label>
                                             <input name="bayar"
                                                 class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
-                                                type="number" placeholder="Rp . " id="alamat" required>
+                                                type="number" placeholder="Rp . " required>
                                         </div>
                                         <button type="submit" class="px-4 py-2 bg-blue-600 rounded text-white font-medium">Simpan</button>
                                     </form>

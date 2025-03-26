@@ -20,4 +20,7 @@ class pelanggan extends Model
     public function pesanan(){
         return $this->hasMany(pesanan::class,'idpelanggan');
     }
+    public function transaksi(){
+        return $this->hasMany(transaksi::class,'idpelanggan');
+    }
 }

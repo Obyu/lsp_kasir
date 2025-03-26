@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Kasir\TransactionController;
 use App\Http\Controllers\OrderController;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -51,8 +54,10 @@ Route::prefix('pelanggan')->controller(PelangganController::class)->name('pelang
 Route::prefix('pesanan')->controller(OrderController::class)->name('pesanan.')->group(function () {
     Route::get('/','index')->name('index');
     Route::get('/create','create')->name('create');
+    Route::post('/addcart','AddToCart')->name('addcart');
     Route::post('/store/{id}','store')->name('store');
     Route::get('/edit/{id}','edit')->name('edit');
+    Route::get('/show/{id}','show')->name('show');
     Route::put('/update/{id}','update')->name('update');
     Route::delete('/delete/{id}','delete')->name('delete');
 });
@@ -61,15 +66,20 @@ Route::prefix('transaction')->controller(TransactionController::class)->name('tr
     Route::get('/','index')->name('index');
     Route::get('/Report','show')->name('report');
     Route::get('/create/{id}','create')->name('create');
-    Route::post('/store/{id}','store')->name('store');
+    Route::post('/store','store')->name('store');
     Route::get('/edit/{id}','edit')->name('edit');
     Route::put('/update/{id}','update')->name('update');
     Route::delete('/delete/{id}','delete')->name('delete');
+    Route::get('/print/{id}','print')->name('print');
 });
 
 Route::prefix('login')->controller(LoginController::class)->name('login.')->group(function () {
     Route::get('/','index')->name('index');
     Route::post('/store','store')->name('store');
     Route::post('/logout','logout')->name('logout');
+});
+
+Route::get('/invoice', function () {
+    return view('invoices.template');
 });
 

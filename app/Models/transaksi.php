@@ -11,7 +11,7 @@ class transaksi extends Model
     protected $table = 'transaksi';
     protected $primaryKey = 'idtransaksi';
     protected $fillable = [
-    	'idpesanan',	
+        'idpelanggan',
         'total',	
         'bayar',	
         'kembalian',	
@@ -20,5 +20,8 @@ class transaksi extends Model
 
     public function pesanan(){
         return $this->belongsTo(pesanan::class,'idpesanan');
+    }
+    public function pelanggan(){
+        return $this->belongsTo(pelanggan::class,'idpelanggan');
     }
 }
