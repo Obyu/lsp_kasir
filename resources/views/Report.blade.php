@@ -89,6 +89,25 @@
                                     </div>
                                 </div>
                             </div>
+                            @if (session('success'))
+                                        <div id="alert-box" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                                        <div class="relative px-6 py-3 text-center bg-green-100 border border-green-200 rounded alert-dismissible" role="alert">
+                                            <button onclick="this.parentElement.remove()" class="absolute text-lg alert-close ltr:ml-auto rtl:mr-auto text-zinc-500 top-2 right-3" fdprocessedid="8n73i"><i class="mdi mdi-close"></i></button>
+                                           <div class="mt-2 mb-4">
+                                            <i class="text-6xl text-green-500 mdi mdi-check-all"></i>
+                                           </div>
+                                        <h5 class="text-green-500">Success</h5>
+                                        <p class="mt-1 mb-4 text-green-800">{{ session('success') }}</p>
+                                        </div>
+                                        </div>
+                                        <script>
+                                            function closealert()
+                                            {
+                                                document.getElementById("alert-box").remove();
+                                            }
+                                            setTimeout(closealert, 2000);
+                                        </script>
+                                        @endif  
                         </div>
 
                         <script>

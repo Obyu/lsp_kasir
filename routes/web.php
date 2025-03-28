@@ -39,7 +39,7 @@ Route::prefix('menu')->controller(MenuController::class)->name('menu.')->group(f
     Route::post('/store', 'store')->name('store');
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::put('/update/{id}','update')->name('update');
-    Route::delete('/delete','delete')->name('delete');
+    Route::delete('/delete/{id}','delete')->name('delete');
 });
 
 Route::prefix('pelanggan')->controller(PelangganController::class)->name('pelanggan.')->group(function () {

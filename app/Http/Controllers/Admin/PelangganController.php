@@ -41,15 +41,25 @@ class PelangganController extends Controller
 
     }
 
-    public function edit(){
-
+    public function edit($id){
+        
     }
 
-    public function update()  {
-
+    public function update(Request $request, $id)  {
+        $pelanggan = pelanggan::findOrFail($id);
+        $pelanggan->update([
+            'Namapelanggan' => $request->nama,
+            'Jeniskelamin' => $request->jk,
+            'Nohp' => $request->hp,
+            'alamat' => $request->alamat
+        ]);
+        $pelanggan->save();
+        return redirect()->back()->with('success', 'anda berhasil mengedit data');
     }
 
-    public function delete(){
-
+    public function delete($id){
+        $pelanggan = pelanggan::findOrFail($id);
+        $pelanggan->delete();
+        return redirect()->back()->with('success', 'Berhasil Menghapus data');
     }
 }

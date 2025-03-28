@@ -11,7 +11,6 @@
                              
                                 
                                <h1>Selamat Datang {{ $role }}</h1>
-                            
                         </div>
                         </div>
                         @endsection

@@ -45,10 +45,69 @@
             <button type="submit" class="w-full py-2 text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Log In</button>
         </form>
 
+
+        <div id="Modalloaded" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <p id="loadtext" class=" text-lg text-gray-700"></p>
+            </div>
+        </div>
+
         <div class="mt-6 text-center">
             <p class="text-gray-600 text-sm">Don't have an account? <a href="register.html" class="text-violet-500 font-semibold hover:underline">Signup now</a></p>
         </div>
     </div>
   </body>
+<script>
+    const text= "Mohon Tunggu...";
+    const loadtext = document.getElementById("loadtext");
 
+    function animate() {
+        loadtext.innerHTML = "";
+        let index = 0;
+
+        const showinterfal = setInterval(() => {
+            if (index < text.length) {
+                loadtext.innerHTML +=text[index];
+                index++;
+            } else {
+                clearInterval(showinterfal);
+
+                setTimeout(() => {
+                    let hidetext = text.length;
+                    const hideinterval = setInterval(() => {
+                        if (hidetext > 0) {
+                            loadtext.innerHTML = text.substring(0, hidetext - 1);
+                            hidetext--;
+                        } else{
+                            clearInterval(hideinterval);
+                            setTimeout(animate, 250);
+                        }
+                    },50);
+                }, 250);
+            }
+        }, 50);
+    }
+    function showlogin() 
+    {
+        document.getElementById("Modalloaded").classList.remove("hidden");
+        animate();
+    }
+    function hidelogin() {
+        document.getElementById("Modalloaded").classList.add("hidden");
+    }
+
+    function cihuy() {
+        showlogin();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let form = document.querySelector("form");
+        if (form) {
+            form.addEventListener("submit", function () {
+                showlogin();
+            });
+        }
+    });
+    
+</script>
 </html>

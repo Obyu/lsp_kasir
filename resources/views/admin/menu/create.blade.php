@@ -62,10 +62,31 @@
                                         </div>
                                         <button type="submit" class="px-4 py-2 bg-blue-600 rounded text-white font-medium">Simpan</button>
                                     </form>
+                                    <div id="Modalload" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
+                                        <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                                            <img src="{{ asset('assets/gip/icons8-process.gif') }}" alt="">
+                                            <p class="mt-4 text-gray-700">Mohon Tunggu</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <script>
+                            function openmodal() {
+                                document.getElementById("Modalload").classList.remove("hidden");
+                            }
+                            function closemodal(){
+                                document.getElementById("Modalload").classList.add("hidden");
+                            }
+
+                            document.addEventListener("DOMContentLoaded", function() {
+                                let form = document.querySelector("form");
+                                if (form) {
+                                    form.addEventListener("submit", function(){
+                                        openmodal();
+                                    });
+                                }
+                            });
                           document.addEventListener('DOMContentLoaded', function () {
                             const hargaInput = document.getElementById('Harga');
                             const form = document.querySelector('form'); 
