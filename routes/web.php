@@ -23,6 +23,7 @@ Route::prefix('dashboard')->controller(DashboardController::class)->name('dashbo
     Route::get('/kasir', 'index_kasir')->name('kasir');
     Route::get('/owner', 'index_owner')->name('owner');
     Route::get('/waiter', 'index_waiter')->name('waiter');
+    Route::get('/search', 'search')->name('search');
 });
 
 Route::prefix('meja')->controller(MejaController::class)->name('meja.')->group(function () {
@@ -65,8 +66,9 @@ Route::prefix('pesanan')->controller(OrderController::class)->name('pesanan.')->
 Route::prefix('transaction')->controller(TransactionController::class)->name('transaction.')->group(function () {
     Route::get('/','index')->name('index');
     Route::get('/Report','show')->name('report');
+    Route::get('/result-search','Stransaksi')->name('stransaksi');
     Route::get('/create/{id}','create')->name('create');
-    Route::post('/store','store')->name('store');
+    Route::post('/store/{id}','store')->name('store');
     Route::get('/edit/{id}','edit')->name('edit');
     Route::put('/update/{id}','update')->name('update');
     Route::delete('/delete/{id}','delete')->name('delete');

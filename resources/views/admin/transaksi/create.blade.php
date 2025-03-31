@@ -44,7 +44,7 @@
                         <div class="card-body">
                             <div class="">
                                 <div class="col-span-12 lg:col-span-6">
-                                    <form action="{{ route('transaction.store') }}" method="POST">
+                                    <form action="{{ route('transaction.store', $idmeja) }}" method="POST">
                                         @csrf
                                         <div class="mb-4">
                                             <label for="nama"

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -23,17 +24,19 @@ class TransactionController extends Controller
 
     public function create($id){
         $pelanggan = pelanggan::findOrFail($id);
+        $meja = pesanan::where('idpelanggan',$id)->first();
+        $idmeja = $meja->meja->id;
         $transaksi = DB::table('pesanan')
         ->join('menu', 'pesanan.idmenu', '=', 'menu.idmenu')
         ->where('pesanan.idpelanggan', $id)
         ->selectRaw('SUM(menu.harga * pesanan.jumlah) AS total_harga')
         ->groupBy('pesanan.idpelanggan')
         ->first();
-        return view('admin.transaksi.create', compact('transaksi','pelanggan'));
+        return view('admin.transaksi.create', compact('idmeja','transaksi','pelanggan'));
     }
 
-    public function store(Request $request){
-
+    public function store(Request $request, $id){
+        $meja = meja::findOrFail($id);
         $request->validate([
             'idpelanggan' => 'required',
             'total'       => 'required|numeric|min:1',	
@@ -53,6 +56,8 @@ class TransactionController extends Controller
                 'kembalian'   => $kembalian,
                 'Kurang'      => $kurang,
             ]);
+            $meja->status = 'kosong';
+            $meja->save();
     
             return redirect()->route('transaction.report')->with('success', 'Transaksi berhasil ditambahkan!');
     
@@ -84,6 +89,12 @@ class TransactionController extends Controller
         $transaksis = $query->with('pelanggan')->get();
     
         return view('report', compact('transaksis'));
+    }
+
+    public function Stransaksi(Request $request){
+        $Idpelanggan = $request->input('idpelanggan');
+        $transaksi = pelanggan::where('idpelanggan', $Idpelanggan)->whereHas('pesanan')->get();
+        return response()->json($transaksi);
     }
 
     public function print($id)

@@ -3,9 +3,21 @@
 
                         <div class="col-span-12 xl:col-span-6">
                             <div class="dark:bg-zinc-800 dark:border-zinc-600">
+                            <div>
+                                <form class="hidden app-search xl:block">
+                                    <div class="relative inline-block">
+                                        <input type="text" id="search" class="pl-4 pr-[40px] border-0 rounded bg-[#f8f9fa] dark:bg-[#363a38] focus:ring-0 text-13 placeholder:text-13 dark:placeholder:text-gray-200 dark:text-gray-100  max-w-[223px]" placeholder="Search...">
+                                        <button class="py-1.5 px-2.5 w-9 h-[34px] text-white bg-violet-500 inline-block absolute ltr:right-1 top-1 rounded shadow shadow-violet-100 dark:shadow-gray-900 rtl:left-1 rtl:right-auto" type="button"><i class="align-middle bx bx-search-alt"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div id="searchResults">
+                            <input type="hidden" id="idpelanggan">
+                            </div>
                                 <div class="card-body">
                                     <div class="relative overflow-x-auto w-full">
-                                        <table class="w-full text-sm text-left text-gray-500 ">
+                                        <table id="transaksitable" class="w-full text-sm text-left text-gray-500 ">
                                             <thead class="text-sm text-gray-700 dark:text-gray-100 bg-gray-50 dark:bg-zinc-600">
                                                 <tr>
                                                     <th scope="col" class="px-6 py-3">
@@ -61,3 +73,4 @@
 
 
 @endsection
+@vite(['resources/js/app.js'])
