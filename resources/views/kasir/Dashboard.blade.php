@@ -9,7 +9,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="bg-white p-6 border border-gray-300 rounded-full shadow hover:shadow-md transition">
             <div class="text-sm text-gray-500 mb-2">Total Penjualan Hari Ini</div>
-            <div class="text-2xl font-bold text-green-600">Rp 2.500.000</div>
+            <div class="text-2xl font-bold text-green-600">{{'Rp ' .  number_format($pendapatan ,0,',','.') }}</div>
         </div>
 
         <div class="bg-white p-6 border border-gray-300 rounded-full shadow hover:shadow-md transition">

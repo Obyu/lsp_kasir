@@ -19,8 +19,10 @@ class OrderController extends Controller
         return view('waiters.pesanan.index', compact('pelanggans'));
     }
     public function show($id){
+        $pelanggan = pelanggan::findOrFail($id);
+        $meja = $pelanggan->pesanan()->first()?->meja?->id;
         $pesanans = pesanan::where('idpelanggan',$id)->get();
-        return view('waiters.pesanan.show' , compact('pesanans'));
+        return view('waiters.pesanan.show' , compact('pesanans','pelanggan','meja'));
     }
 
     public function AddToCart(Request $request)
@@ -39,6 +41,13 @@ class OrderController extends Controller
         $cart = Session::get('cart', []);
         $mejas = meja::where('status', 'kosong')->get();
         return view('waiters.pesanan.create',compact('cart','menus','pelanggans','mejas',));
+    }
+    public function Newcreate($id, $idmeja){
+        $menus = menu::all();
+        $pelanggans = pelanggan::find($id);
+        $cart = Session::get('cart', []);
+        $mejas = meja::find($idmeja);
+        return view('waiters.pesanan.new-order',compact('cart','menus','pelanggans','mejas',));
     }
 
     public function store(Request $request){
@@ -59,11 +68,6 @@ class OrderController extends Controller
                     'meja_id'       =>  $meja->id,
                     'iduser'        =>  $user->iduser
               ]);
-           
-            $menus = menu::find($data['menu']);
-            $menu = $menus->terjual;
-            $total = $menu + $data['jumlah'];
-            DB::statement("CALL tambah_penjualan(?,?)",[$data['menu'],$total]);
         }
             $meja->status = 'terpakai';
             $meja->save();
@@ -82,11 +86,14 @@ class OrderController extends Controller
         return view('waiters.pesanan.edit', compact('pesanan','menus'));
     }
 
-    public function update($id)  {
+    public function update(Request $request , $id, $idpelanggan)  {
         $pesanan = pesanan::findOrFail($id);
-        $pesanan->save();
+        $pesanan->update([
+            'idmenu' => $request->menu,
+            'jumlah' => $request->jumlah
+        ]);
 
-        return redirect()->route('pesanan.show',$id)->with('success', 'berhasil mengedit data');
+        return redirect()->route('pesanan.show',$idpelanggan)->with('success', 'berhasil mengedit data');
     }
 
     public function delete($id)

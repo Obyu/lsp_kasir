@@ -66,7 +66,7 @@
                                                         {{$pelanggan->Namapelanggan}}
                                                     </td>
                                                     <td class="px-6 py-3.5 dark:text-zinc-100 text-center">
-                                                       <a href="{{ route('pesanan.show', $pelanggan->idpelanggan) }}">
+                                                       <a href="{{ route('pesanan.show', $pelanggan->idpelanggan,) }}">
                                                        <img src="{{ asset('assets/img/eye-open-svgrepo-com.png') }}" alt="View" class="w-6 h-6">
                                                         </a>
                                                     </td>

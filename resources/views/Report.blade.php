@@ -14,18 +14,17 @@
                                         <select name="filter" id="filter" class="p-2 w-32 border  rounded bg-white dark:bg-zinc-700 dark:text-white">
                                             <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Semua</option>
                                             <option value="today" {{ request('filter') == 'today' ? 'selected' : '' }}>Hari Ini</option>
-                                            <option value="this_month" {{ request('filter') == 'this_month' ? 'selected' : '' }}>Bulan Ini</option>
-                                            <option value="last_month" {{ request('filter') == 'last_month' ? 'selected' : '' }}>Bulan Lalu</option>
+                                            <option value="this_month" {{ request('filter') == 'this_month' ? 'selected' : '' }}>bulan</option>
                                             <option value="year" {{ request('filter') == 'year' ? 'selected' : '' }}>Tahun</option>
                                         </select>
 
+                                        <input type="number" name="bulan" id="month" class="p-2 border rounded bg-white dark:bg-zinc-700 dark:text-white hidden" placeholder="bulan" value="{{ request('bulan') }}">
                                         <input type="number" name="year" id="year" class="p-2 border rounded bg-white dark:bg-zinc-700 dark:text-white hidden" placeholder="Masukkan Tahun" value="{{ request('year') }}">
 
                                         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-600 transition">Filter</button>
                                         
-                                        <button onclick="printTable()" class="px-5 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-                                            Print
-                                        </button>
+                                        <a href="{{ url()->current() }}?filter={{ request('filter') }}&bulan={{ request('bulan') }}&year={{ request('year') }}&print=true" target="_blank" class="px-5 py-2 bg-green-600 text-white rounded hover:bg-green-700">Print</a>
+
                                     </div>
                                 </form>
                                     <div id="print-area" class="relative overflow-x-auto w-full">
@@ -123,11 +122,19 @@
                             }
                             document.getElementById('filter').addEventListener('change', function () {
                                 let yearInput = document.getElementById('year');
+                                let monthInput = document.getElementById('month');
 
                                 if (this.value === 'year') {
                                     yearInput.classList.remove('hidden');
                                 } else {
                                     yearInput.classList.add('hidden');
+                                }
+                                
+
+                                if (this.value === 'this_month') {
+                                    monthInput.classList.remove('hidden');
+                                } else {
+                                    monthInput.classList.add('hidden');
                                 }
                             });
                         </script>

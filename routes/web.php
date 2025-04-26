@@ -58,11 +58,12 @@ Route::prefix('pelanggan')->controller(PelangganController::class)->name('pelang
 Route::prefix('pesanan')->controller(OrderController::class)->name('pesanan.')->group(function () {
     Route::get('/','index')->name('index');
     Route::get('/create','create')->name('create');
+    Route::get('/create/new/{id}/{idmeja}','Newcreate')->name('new.create');
     Route::post('/addcart','AddToCart')->name('addcart');
     Route::post('/store','store')->name('store');
     Route::get('/edit/{id}','edit')->name('edit');
     Route::get('/show/{id}','show')->name('show');
-    Route::put('/update/{id}','update')->name('update');
+    Route::put('/update/{id}/{idpelanggan}','update')->name('update');
     Route::delete('/delete/{id}','delete')->name('delete');
 });
 

@@ -43,13 +43,13 @@
                         <div class="card-body">
                             <div class="">
                                 <div class="col-span-12 lg:col-span-6">
-                                    <form action="{{ route('pesanan.update', $pesanan->idpesanan) }}" method="POST">
+                                    <form action="{{ route('pesanan.update', [$pesanan->idpesanan, $pesanan->pelanggan->idpelanggan]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-4">
                                         <label for="nama"
                                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Nomor Meja</label>
-                                                <select name="meja" class="dark:bg-zinc-800 dark:border-zinc-700 w-full rounded border-transparent py-2.5 text-sm text-gray-500 focus:border focus:border-violet-500 focus:ring-0 dark:bg-zinc-700/50 dark:text-zinc-100" fdprocessedid="5vhotj">
+                                                <select name="menu" class="dark:bg-zinc-800 dark:border-zinc-700 w-full rounded border-transparent py-2.5 text-sm text-gray-500 focus:border focus:border-violet-500 focus:ring-0 dark:bg-zinc-700/50 dark:text-zinc-100" fdprocessedid="5vhotj">
                                                     <option>{{ $pesanan->menu->Namamenu }}</option>
                                                     @foreach ($menus as $menu)
                                                     <option value="{{ $menu->idmenu }}">{{ $menu->Namamenu }}</option>
@@ -60,7 +60,7 @@
                                         <div class="mb-4">
                                             <label for="telp"
                                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Jumlah</label>
-                                            <input name="Harga"
+                                            <input name="jumlah"
                                                 class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
                                                 type="text" placeholder="{{ $pesanan->jumlah }}" id="arga" required>
                                         </div>

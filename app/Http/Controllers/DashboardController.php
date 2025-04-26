@@ -47,7 +47,7 @@ class DashboardController extends Controller
         $bulan = $request->input('bulan', now()->format('Y-m'));
         $minggu = $request->input('minggu', ceil(now()->day / 7));
         $income = DB::select("CALL PendapatanHarian(?, ?)", [$bulan,$minggu]);
-
+        $pendapatan = $income[0]->TotalPendapatan ?? 0;
         $transalateHari = [
             'Mondat' => 'Senin',
             'Tuesday' => 'Selasa',
@@ -65,7 +65,7 @@ class DashboardController extends Controller
             $p_Harian[] = $row->TotalPendapatan;
         }
         $transaksis = transaksi::with('pesanan')->get();
-        return view('kasir.dashboard', compact('label','p_Harian','t_transaksi','role','transaksis'));
+        return view('kasir.dashboard', compact('pendapatan','label','p_Harian','t_transaksi','role','transaksis'));
     }
     public function index_admin(){
         $user = Auth::user();

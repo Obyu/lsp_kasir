@@ -70,28 +70,40 @@ class TransactionController extends Controller
     }
     
     
-    public function Show(Request $request){
+    public function Show(Request $request)
+    {
         $query = Transaksi::query();
-
+    
         $filter = $request->input('filter', 'all');
         $year = $request->input('year');
+        $bulan = $request->input('bulan');
+    
+        $tanggalFilter = ''; // untuk label filter di laporan
     
         if ($filter == 'today') {
             $query->whereDate('created_at', Carbon::today());
-        } elseif ($filter == 'this_month') {
-            $query->whereYear('created_at', Carbon::now()->year)
-                  ->whereMonth('created_at', Carbon::now()->month);
-        } elseif ($filter == 'last_month') {
-            $query->whereYear('created_at', Carbon::now()->subMonth()->year)
-                  ->whereMonth('created_at', Carbon::now()->subMonth()->month);
+            $tanggalFilter = Carbon::today()->format('d F Y'); // contoh: 27 April 2025
+        } elseif ($filter == 'this_month' && $bulan) {
+            $query->whereYear('created_at', $year)
+                  ->whereMonth('created_at', $bulan);
         } elseif ($filter == 'year' && $year) {
             $query->whereYear('created_at', $year);
-        }
+        } 
+        $tanggalFilter = Carbon::createFromDate($year, $bulan, 1)->translatedFormat('F Y');
+
     
-        $transaksis = $query->with('pelanggan')->get();
+        $transaksis = $query->with('pelanggan')->orderBy('created_at', 'desc')->get();
+        $total = $transaksis->sum('total');
+        $tanggalCetak = now()->format('d F Y'); // tanggal saat dicetak
+    
+        // Kalau mau print
+        if ($request->input('print') == 'true') {
+            return view('generate', compact('transaksis', 'total', 'tanggalFilter', 'tanggalCetak'));
+        }
     
         return view('report', compact('transaksis'));
     }
+    
 
     public function Stransaksi(Request $request){
         $Idpelanggan = $request->input('idpelanggan');
