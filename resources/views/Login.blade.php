@@ -34,13 +34,7 @@
                 <input name="password" type="password" class="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-violet-500 focus:outline-none" placeholder="Enter password">
             </div>
 
-            <div class="flex items-center justify-between mb-6">
-                <label class="flex items-center text-sm text-black-700">
-                    <input type="checkbox" class="w-4 h-4 mr-2 text-violet-500 focus:ring-violet-400">
-                    Remember me
-                </label>
-                <a href="#" class="text-sm text-yellow-500 hover:underline">Forgot password?</a>
-            </div>
+         
 
             <button type="submit" class="w-full py-2 text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">Log In</button>
         </form>
@@ -52,9 +46,7 @@
             </div>
         </div>
 
-        <div class="mt-6 text-center">
-            <p class="text-gray-600 text-sm">Don't have an account? <a href="register.html" class="text-violet-500 font-semibold hover:underline">Signup now</a></p>
-        </div>
+
     </div>
   </body>
 <script>

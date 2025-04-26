@@ -6,11 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Tailwind Admin & Dashboard Template" name="description">
         <meta content="Themesbrand" name="author">
-        @vite('/resources/css/app.css')
+        @vite(['resources/css/app.css','resources/js/app.js'])
         <!-- App favicon -->
+        <script src="public/assets/js/titid.js"></script>
         <link rel="shortcut icon" href="assets/images/logo.png">
         
-        <script src="/resources/js/custom.js"></script>
         <!-- alertifyjs Css -->
         
 
@@ -25,7 +25,7 @@
       <link rel="stylesheet" href="/assets/css/tailwind2.css">
     </head>
 
-    <body data-mode="light" data-sidebar-size="lg" class="group min-h-screen">
+    <body data-sidebar-size="lg" class=" group min-h-screen">
     @php
                                 $user = Auth::user();
                                 $role = $user->level;
@@ -34,61 +34,84 @@
         <div class="fixed bottom-0 z-10 h-screen ltr:border-r rtl:border-l vertical-menu rtl:right-0 ltr:left-0 top-[70px] bg-slate-50 border-gray-50 print:hidden dark:bg-zinc-800 dark:border-neutral-700">
         
             <div data-simplebar class="h-full">
-                <!--- Sidemenu -->
                 <div class="metismenu pb-10 pt-2.5" id="sidebar-menu">
-                    <!-- Left Menu Start -->
                     <ul id="side-menu">
-                        @if ($role != 'owner')
-                        <li class="px-5 py-3 text-xs font-medium text-gray-500 cursor-default leading-[18px] group-data-[sidebar-size=sm]:hidden block" data-key="t-menu">Menu</li>
-        
-                        <li>
-                            <a href="{{ route('dashboard.dashboard') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
-                                <i class=" bx bx-home-alt text-lg pl-2"></i>
-                                <span data-key="t-dashboard" class="px-2"> Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('menu.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
-                                <i class="bx bxs-food-menu text-lg pl-2"></i>
-                                <span data-key="t-dashboard" class="px-2"> Menu</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('pelanggan.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
-                                <i class="bx bx-user-plus text-lg pl-2"></i>
-                                <span data-key="t-dashboard" class="px-2"> Pelanggan</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('meja.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
-                                <i class="mdi mdi-table-chair text-lg pl-2"></i>
-                                <span data-key="t-dashboard" class="px-2"> Meja</span>
-                            </a>
-                        </li>
-                        <li>
-                        <a href="{{ route('pesanan.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
-                                <i class=" bx bx-shopping-bag text-lg pl-2" fill="#545a6d33"></i>
-                                <span data-key="t-dashboard"  class="px-2"> Pesanan</span>
+
+                @if ($role != 'owner')
+                    <li class="px-5 py-3 text-xs font-medium text-gray-500 cursor-default leading-[18px] group-data-[sidebar-size=sm]:hidden block" data-key="t-menu">Menu</li>
+                @endif
+
+                @if ($role != 'owner' && $role != 'waiter' && $role != 'kasir' )
+                    <li>
+                        <a href="{{ route('dashboard.admin') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="bx bx-home-alt text-lg pl-2"></i>
+                            <span class="px-2">Dashboard</span>
                         </a>
-                        </li>
-                        <li>
-                        <a href="{{ route('transaction.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
-                                <i class="bx bx-money text-lg pl-2" fill="#545a6d33"></i>
-                                <span data-key="t-dashboard" class="px-2"> Transaksi</span>
-                           </a>
-                        </li>
-                        <li>
-                            <a href="index.html" class="block py-2.5 px-6 text-sm font-medium text-gray-950 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
-                                <i class="bx bxs-user-plus text-lg pl-2"></i>
-                                <span data-key="t-dashboard" class="px-2"> User</span>
-                            </a>
-                        </li>
-                        
-                        
-                        @endif
-                    </ul>
-        
-                        
+                    </li>
+                @endif
+                @if ($role != 'owner' && $role != 'admin' && $role != 'kasir')
+                    <li>
+                        <a href="{{ route('dashboard.waiter') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="bx bx-home-alt text-lg pl-2"></i>
+                            <span class="px-2">Dashboard</span>
+                        </a>
+                    </li>
+                @endif
+                @if ($role != 'owner' && $role != 'admin' && $role != 'waiter')
+                    <li>
+                        <a href="{{ route('dashboard.kasir') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="bx bx-home-alt text-lg pl-2"></i>
+                            <span class="px-2">Dashboard</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if ($role == 'admin')
+                    <li>
+                        <a href="{{ route('meja.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="mdi mdi-table-chair text-lg pl-2"></i>
+                            <span class="px-2">Meja</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if ($role == 'waiter' || $role == 'admin')
+                    <li>
+                        <a href="{{ route('menu.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="bx bxs-food-menu text-lg pl-2"></i>
+                            <span class="px-2">Menu</span>
+                        </a>
+                    </li>
+                @endif
+                @if ($role == 'waiter')
+                    <li>
+                        <a href="{{ route('pesanan.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="bx bx-shopping-bag text-lg pl-2"></i>
+                            <span class="px-2">Pesanan</span>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- Transaksi hanya kasir --}}
+                @if ($role == 'kasir')
+                    <li>
+                        <a href="{{ route('transaction.index') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="bx bx-money text-lg pl-2"></i>
+                            <span class="px-2">Transaksi</span>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- Generate Laporan hanya untuk owner --}}
+                @if ($role == 'owner' || $role == 'waiter' || $role == 'kasir')
+                    <li>
+                        <a href="{{ route('transaction.report') }}" class="block py-2.5 px-6 text-sm font-medium text-gray-950 hover:text-violet-500">
+                            <i class="bx bx-bar-chart text-lg pl-2"></i>
+                            <span class="px-2">Laporan</span>
+                        </a>
+                    </li>
+                @endif
+
+                </ul>                
                 </div>
                 <!-- Sidebar -->
             </div>
@@ -165,11 +188,12 @@
                 </div>
             </div>
         </div>
+        @yield('script')
         <script src="/assets/libs/@popperjs/core/umd/popper.min.js"></script>
         <script src="/assets/libs/feather-icons/feather.min.js"></script>
         <script src="/assets/libs/metismenujs/metismenujs.min.js"></script>
         <script src="/assets/libs/simplebar/simplebar.min.js"></script>
-        <!-- alertifyjs js -->
+        <script src="/assets/libs/jquery/jquery.min.js"></script>
         <script src="/assets/libs/alertifyjs/build/alertify.min.js"></script>
 
         <script  src="/assets/js/app.js"></script>

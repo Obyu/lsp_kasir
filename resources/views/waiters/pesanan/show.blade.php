@@ -4,6 +4,10 @@
                     <div class="grid grid-cols-1 pb-6">
                         <div class="md:flex items-center justify-between px-[2px]">
                             <h4 class="text-[18px] font-medium text-gray-800 mb-sm-0 grow dark:text-gray-100 mb-2 md:mb-0">Data Meja</h4>
+                            <a href="{{ route('pesanan.create') }}" class="bg-blue-600 p-2 text-white rounded-lg flex gap-2 items-center">
+                                <i class="bx bx-plus text-lg"></i>
+                                <span>Tambah Pesanan</span>
+                            </a>
                         </div>
                     </div>
                         <div class="col-span-12 xl:col-span-6">

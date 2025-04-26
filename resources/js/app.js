@@ -1,4 +1,6 @@
 import './bootstrap';
+import {Chart} from 'chart.js';
+window.Chart = Chart;
 import $, { ajax, data } from "jquery";
 $(document).ready(function () {
     $('#search').on('keyup', function () {

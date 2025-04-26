@@ -24,5 +24,23 @@
             </a>
         </div>
     </div>
+    <div class="text-2xl font-bold mb-6">Dashboard</div>
+    <canvas id="weeklySalesChart" width="400" height="200"></canvas>
+
                         @endsection
-                        @vite(['resources/js/app.js'])
+                        @section('scripts')
+<script>
+    const ctx = document.getElementById('weeklySalesChart');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Senin', 'Selasa', 'Rabu'],
+            datasets: [{
+                label: 'Penjualan',
+                data: [150, 200, 100],
+                backgroundColor: ['#F87171', '#34D399', '#60A5FA'],
+            }]
+        },
+    });
+</script>
+@endsection

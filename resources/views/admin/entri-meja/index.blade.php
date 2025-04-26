@@ -18,9 +18,6 @@
                                                 
                                                 <tr>
                                                     <th scope="col" class="px-6 py-3">
-                                                        No
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
                                                         No Meja
                                                     </th>
                                                     <th scope="col" class="px-6 py-3">
@@ -34,9 +31,7 @@
                                             <tbody>
                                                 @foreach ($mejas as $meja)
                                                 <tr class="bg-white border-b border-gray-50 dark:bg-zinc-700 dark:border-zinc-600">
-                                                    <th scope="row" class="px-6 py-3.5 font-medium text-gray-900 whitespace-nowrap dark:text-zinc-100">
-                                                        {{ $loop->iteration }}
-                                                    </th>
+                                                   
                                                     <td class="px-6 py-3.5 dark:text-zinc-100">
                                                         {{$meja->NoMeja}}
                                                     </td>

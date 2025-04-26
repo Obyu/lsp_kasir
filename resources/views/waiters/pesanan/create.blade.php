@@ -46,9 +46,7 @@
                         <div class="card-body">
                             <div class="">
                                 <div class="col-span-12 lg:col-span-6">
-                                    @foreach ($mejas as $meja)
-                                    <form action="{{ route('pesanan.store', $meja->id) }}" method="POST">
-                                        @endforeach
+                                    <form action="{{ route('pesanan.store') }}" method="POST">
                                         @csrf
                                         <div class="mb-4">
                                             <label for="nama"

@@ -22,7 +22,7 @@ class LoginController extends Controller
             $user = Auth::user();
             switch ($user->level) {
                 case 'admin':
-                    return redirect()->route('dashboard.dashboard')->with('success'.'Anda Berhasil Login' . $user->level);
+                    return redirect()->route('dashboard.admin')->with('success'.'Anda Berhasil Login' . $user->level);
                 case 'waiter':
                     return redirect()->route('dashboard.waiter')->with('success'.'Anda Berhasil Login' . $user->level);
                 case 'kasir':

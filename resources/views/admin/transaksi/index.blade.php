@@ -24,7 +24,7 @@
                                                         No
                                                     </th>
                                                     <th scope="col" class="px-6 py-3">
-                                                        Nama Pelanggan
+                                                        Nama Pelanggan 
                                                     </th>
                                                     <th scope="col" class="px-6 py-3">
                                                         Aksi

@@ -56,9 +56,10 @@
                                                 class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
                                                 type="text" placeholder="{{ $pelanggan->Namapelanggan }}"  value="{{ $pelanggan->idpelanggan }}" hidden> 
                                         </div>
+                                        <input type="text" name="idpesanan" value="{{ $meja->idpesanan }}">
                                         <div class="mb-4">
                                             <label for="telp"
-                                                class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Total Tagihan</label>
+                                                class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Total Tagihan{{ $idmeja }}</label>
                                             <input name="total"
                                                 class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
                                                 type="number"   value="{{$transaksi->total_harga}}" required hidden>

@@ -32,7 +32,7 @@ class TransactionController extends Controller
         ->selectRaw('SUM(menu.harga * pesanan.jumlah) AS total_harga')
         ->groupBy('pesanan.idpelanggan')
         ->first();
-        return view('admin.transaksi.create', compact('idmeja','transaksi','pelanggan'));
+        return view('admin.transaksi.create', compact('meja','idmeja','transaksi','pelanggan'));
     }
 
     public function store(Request $request, $id){
@@ -42,6 +42,7 @@ class TransactionController extends Controller
             'total'       => 'required|numeric|min:1',	
             'bayar'       => 'required|numeric|min:0',
         ]);
+        $idpesanan = $request->idpesanan;
     
         try {
             $total = $request->total;
@@ -58,6 +59,7 @@ class TransactionController extends Controller
             ]);
             $meja->status = 'kosong';
             $meja->save();
+            pesanan::find($idpesanan)->delete();
     
             return redirect()->route('transaction.report')->with('success', 'Transaksi berhasil ditambahkan!');
     

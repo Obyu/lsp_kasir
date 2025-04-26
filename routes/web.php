@@ -18,9 +18,12 @@ Route::get('/', function () {
     return view('login');
 });
 
+Route::get('/api/pendapatan/chart', [DashboardController::class, 'chartPendapatan']);
+
 Route::prefix('dashboard')->controller(DashboardController::class)->name('dashboard.')->group(function () {
     Route::get('/',  'index')->name('dashboard');
     Route::get('/kasir', 'index_kasir')->name('kasir');
+    Route::get('/admin', 'index_admin')->name('admin');
     Route::get('/owner', 'index_owner')->name('owner');
     Route::get('/waiter', 'index_waiter')->name('waiter');
     Route::get('/search', 'search')->name('search');
@@ -56,7 +59,7 @@ Route::prefix('pesanan')->controller(OrderController::class)->name('pesanan.')->
     Route::get('/','index')->name('index');
     Route::get('/create','create')->name('create');
     Route::post('/addcart','AddToCart')->name('addcart');
-    Route::post('/store/{id}','store')->name('store');
+    Route::post('/store','store')->name('store');
     Route::get('/edit/{id}','edit')->name('edit');
     Route::get('/show/{id}','show')->name('show');
     Route::put('/update/{id}','update')->name('update');
