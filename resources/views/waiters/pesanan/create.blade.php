@@ -56,6 +56,17 @@
                                                         {{ $item['menu'] }} - {{ $item['jumlah'] }} 
                                                     </li>
                                                 @endforeach
+                                                <div class="flex items-center mb-4">
+                                                    <input id="pilihRadio" type="radio" value="pilih" name="method" onclick="toggleField()"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                                                    <label for="pilihRadio" class="ml-2 text-sm font-medium text-gray-700">Pilih Pelanggan .</label>
+                                                
+                                                    <input id="inputRadio" type="radio" value="input" name="method" onclick="toggleField()"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                                                    <label for="inputRadio" class="ml-2 text-sm font-medium text-gray-700">Input</label>
+                                                </div>
+
+                                                <div id="dropdown" class="mb-4 hidden">
                                             <label for="nama"
                                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Nama Pelanggan</label>
                                                 <select name="pelanggan" class="dark:bg-zinc-800 dark:border-zinc-700 w-full rounded border-transparent py-2.5 text-sm text-gray-500 focus:border focus:border-violet-500 focus:ring-0 dark:bg-zinc-700/50 dark:text-zinc-100" fdprocessedid="5vhotj">
@@ -64,10 +75,46 @@
                                                     <option value="{{ $pelanggan->idpelanggan }}">{{ $pelanggan->Namapelanggan }}</option>
                                                     @endforeach
                                                 </select>
+                                                </div>
+
+                                                <div id="input_pelanggan" class="mb-4 hidden">
+                                                    <div class="mb-4">
+                                                        <label for="nama"
+                                                            class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Nama</label>
+                                                        <input name="nama"
+                                                            class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
+                                                            type="text" placeholder="Masukkan Nama" id="nama" required>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label for="laki-laki"
+                                                            class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Jenis Kelamin</label>
+                                                        <input name="jk"
+                                                            type="radio" value="laki-laki" id="nama" required> Laki-laki
+                                                        <input name="jk"
+                                                            type="radio" value="perempuan" id="nama" required> Perempuan
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label for="telp"
+                                                            class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Nomor HP</label>
+                                                        <input name="hp"
+                                                            class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
+                                                            type="text" placeholder="Masukkan Harga" id="arga" required>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label for="alamat"
+                                                            class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Alamat</label>
+                                                        <input name="alamat"
+                                                            class="w-full placeholder:text-13 text-13 py-1.5 rounded border-gray-100 focus:border focus:border-violet-50 focus:ring focus:ring-violet-500/20 dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100 placeholder:text-gray-800 dark:text-zinc-100"
+                                                            type="text" placeholder="Masukkan alamat" id="alamat" required>
+                                                    </div>
+                                                   
+                                                
+                                                </div>
+
                                             <label for="nama"
                                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-100">Nomor Meja</label>
                                                 <select name="meja" class="dark:bg-zinc-800 dark:border-zinc-700 w-full rounded border-transparent py-2.5 text-sm text-gray-500 focus:border focus:border-violet-500 focus:ring-0 dark:bg-zinc-700/50 dark:text-zinc-100" fdprocessedid="5vhotj">
-                                                    <option>Silahkan PIlih Menu</option>
+                                                    <option>Silahkan PIlih Meja</option>
                                                     @foreach ($mejas as $meja)
                                                     <option value="{{ $meja->id }}">{{ $meja->NoMeja }}</option>
                                                     @endforeach
@@ -124,4 +171,14 @@
         {
             document.getElementById("myModal").classList.add("hidden");
         }
+        function toggleField() {
+    const method = document.querySelector('input[name="method"]:checked').value;
+    if (method === "input") {
+        document.getElementById('input_pelanggan').classList.remove('hidden');
+        document.getElementById('dropdown').classList.add('hidden');
+    } else if (method === "pilih") {
+        document.getElementById('dropdown').classList.remove('hidden');
+        document.getElementById('input_pelanggan').classList.add('hidden');
+    }
+}
        </script>

@@ -56,14 +56,28 @@ class OrderController extends Controller
             'meja' => 'required'
 
         ]);
+
         $user = Auth::user();
         try {
+
+            $idpelanggan = $request->pelanggan;
+
+            if($request->filled('nama')){
+              $pelanggan =  pelanggan::create([
+                    'Namapelanggan' => $request->nama,
+                    'Jeniskelamin' => $request->jk,
+                    'Nohp' => $request->hp,
+                    'alamat' => $request->alamat
+                ]);
+                $idpelanggan = $pelanggan->idpelanggan;
+            }
+
             $meja = meja::find($request->meja);
             $cart = Session::get('cart', []);
             foreach ($cart as $data) {
               pesanan::create([
                     'idmenu'        =>  $data['menu'],
-                    'idpelanggan'   =>  $request->pelanggan,
+                    'idpelanggan'   =>  $idpelanggan,
                     'jumlah'        =>  $data['jumlah'],
                     'meja_id'       =>  $meja->id,
                     'iduser'        =>  $user->iduser
