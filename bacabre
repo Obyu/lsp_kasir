@@ -1,0 +1,9 @@
+Langkah	Penjelasan	Perintah
+1. Install dependency PHP	Menginstall semua package dari composer.json	composer install
+2. Install dependency JS (Tailwind)	Menginstall Tailwind dan frontend lainnya (lihat package.json)	npm install
+3. Copy file .env	Buat .env baru dari contoh	cp .env.example .env
+4. Generate app key Laravel	Untuk validasi session dan enkripsi	php artisan key:generate
+5. Setting koneksi database di .env	Atur DB_DATABASE, DB_USERNAME, DB_PASSWORD	
+6. Jalankan migrasi database (jika ada)	Membuat struktur tabel di database	php artisan migrate
+7. Compile CSS/JS (Tailwind)	Membuat file public/css dan public/js	npm run dev (atau npm run build untuk production)
+8. Jalankan server lokal	Untuk testing	php artisan serve
