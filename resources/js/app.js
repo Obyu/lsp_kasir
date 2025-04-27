@@ -15,7 +15,7 @@ $(document).ready(function () {
                 let resulthtml = "";
                 if (data.length > 0){
                     data.forEach(item => {
-                        resulthtml += `<p class="cursor-pointer hover:bg-gray-200 p-2" data-id="${item.idpelanggan}">${item.Namapelanggan} ${item.idpelanggan}</p>`;
+                        resulthtml += `<p class="cursor-pointer hover:bg-gray-200 p-2" data-id="${item.idpelanggan}">${item.Namapelanggan}</p>`;
                     });
                 } else {
                     resulthtml = "<p>tidak ada hasil</p>";

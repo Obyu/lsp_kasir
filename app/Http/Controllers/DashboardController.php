@@ -111,9 +111,6 @@ class DashboardController extends Controller
         $user = Auth::user();
         $role = $user->level;
 
-        $data_menu_terlaris = DB::select("CALL menu_terlaris");
-        $data_menu_galaku = DB::select("CALL menu_galaku");
-
         $transaksi = DB::select("CALL total_transaksi()");
         $t_transaksi = $transaksi[0]->t_transaksi;
 
@@ -136,8 +133,6 @@ class DashboardController extends Controller
             'role',
             'transaksis',
             't_transaksi',
-            'data_menu_terlaris',
-            'data_menu_galaku'
         ));
     }
 

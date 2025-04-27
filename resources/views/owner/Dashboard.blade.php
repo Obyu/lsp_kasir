@@ -7,7 +7,7 @@
 <!-- Top Section -->
 <div class="grid grid-cols-3 gap-6">
     <!-- Visits -->
-    <div class="bg-gradient-to-br from-blue-50 via-white to-purple-50 p-6 rounded-2xl shadow">
+    <div class="bg-white border border-gray-500 p-6 rounded-2xl shadow">
     <p class="text-gray-500">Total Pendapatan</p>
         <h1 class="text-4xl font-bold text-gray-800">{{'Rp.' . number_format($total,0,'.',',')  }}</h1>
         <div class="mt-4 text-sm text-gray-600 space-y-1">
@@ -19,12 +19,17 @@
     </div>
 
     <!-- Popularity Rate -->
-    <div class="bg-white rounded-2xl p-6 shadow flex flex-col justify-between">
+    <div class="bg-white border border-gray-500 rounded-2xl p-6 shadow flex flex-col justify-between">
         <div>
             <p class="text-gray-500">Total Transaksi</p>
             <div class="text-5xl font-bold text-orange-500">{{ $t_transaksi }}</div>
         </div>
         
+    </div>
+       <div class="bg-white border border-gray-500 rounded-2xl p-6 shadow">
+        <div class="text-sm text-gray-500 mb-2">Monthly Income</div>
+        <h2 class="text-3xl font-bold text-gray-800">{{'Rp.' . number_format($total,0,'.',',')  }}</h2>
+        <canvas id="financeChart" class="mt-6"></canvas>
     </div>
 
     <!-- Illustration -->
@@ -34,48 +39,9 @@
 <!-- Middle Section -->
 <div class="grid grid-cols-3 gap-6">
     <!-- Finance Performance -->
-    <div class="bg-white rounded-2xl p-6 shadow">
-        <div class="text-sm text-gray-500 mb-2">Monthly Income</div>
-        <h2 class="text-3xl font-bold text-gray-800">{{'Rp.' . number_format($total,0,'.',',')  }}</h2>
-        <canvas id="financeChart" class="mt-6"></canvas>
-    </div>
+ 
 
     <!-- Top Performers -->
-    <div class="bg-white rounded-2xl p-6 shadow">
-        <h3 class="text-lg font-semibold text-gray-700 mb-4">Top 5 Menu Terlaris</h3>
-        <ul class="space-y-4">
-            @foreach ($data_menu_terlaris as $item)
-            <li class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <label for="">{{ $loop->iteration }}</label>
-                    <div>
-                        <p class="font-medium">{{ $item->Namamenu }}</p>
-                        <span class="text-xs text-green-500">{{ 'Rp.' . number_format($item->Harga,0,'.',',') }}</span>
-                    </div>
-                </div>
-                <span class="text-sm text-gray-500">{{ $item->terjual }}</span>
-            </li>    
-            @endforeach
-        </ul>
-    </div>
-    <div class="bg-white rounded-2xl p-6 shadow">
-        <h3 class="text-lg font-semibold text-gray-700 mb-4">Top 5 Menu Tidak Laku</h3>
-        <ul class="space-y-4">
-            @foreach ($data_menu_galaku as $item)
-            <li class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <label for="">{{ $loop->iteration }}</label>
-                    <div>
-                        <p class="font-medium">{{ $item->Namamenu }}</p>
-                        <span class="text-xs text-green-500">{{ 'Rp.' . number_format($item->Harga,0,'.',',') }}</span>
-                    </div>
-                </div>
-                <span class="text-sm text-gray-500">{{ $item->terjual }}</span>
-            </li>    
-            @endforeach
-        </ul>
-    </div>
-
     <!-- Targeting by Region -->
 
 </div>
